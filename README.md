@@ -194,7 +194,7 @@ All alerts → Email notification → `your-email@domain.com`
 
 **Shabeer**
 - GitHub: [@Shabeer1024](https://github.com/Shabeer1024)
-- LinkedIn: [your linkedin url]
+- LinkedIn:  https://www.linkedin.com/in/shabeer-s-82690a156/
 
 ---
 
