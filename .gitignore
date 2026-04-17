@@ -7,8 +7,7 @@
 *.tfplan
 main.tfplan
 
-# Sensitive variables
-terraform.tfvars
+
 
 # OS files
 .DS_Store
@@ -17,6 +16,3 @@ Thumbs.db
 # VS Code
 .vscode/
 
-# Screenshots
-Screenshot Images/
-'@ | Out-File -FilePath .gitignore -Encoding utf8
