@@ -63,25 +63,25 @@
 ---
 
 ## 📁 Module Structure
+## 📁 Module Structure
 
-modules/
-├── avd/
-│   ├── hostpool/          # AVD Host Pool + Workspace + App Group
-│   ├── build-vm/          # Golden image build VM
-│   ├── domain-controller/ # Windows Server 2022 DC
-│   ├── domain-join/       # Auto domain join session hosts
-│   ├── session-hosts/     # AVD Session Hosts from gallery
-│   ├── app-install/       # App install via Custom Script Extension
-│   ├── sysprep/           # Automated sysprep
-│   ├── image-capture/     # Capture golden image to gallery
-│   ├── image-gallery/     # Azure Compute Gallery
-│   ├── scaling-plan/      # Auto scaling weekday/weekend
-│   └── fslogix/           # FSLogix profile management
-├── monitoring/            # Log Analytics + 6 Alert Rules
-├── network/vnet/          # VNet + Subnets + DNS
-├── storage/               # Storage Account + File Share
-└── resourcegroup/         # Resource Group
-
+| Module | Path | Purpose |
+|---|---|---|
+| Host Pool | `modules/avd/hostpool/` | AVD Host Pool + Workspace + App Group |
+| Build VM | `modules/avd/build-vm/` | Golden image build VM |
+| Domain Controller | `modules/avd/domain-controller/` | Windows Server 2022 DC |
+| Domain Join | `modules/avd/domain-join/` | Auto domain join session hosts |
+| Session Hosts | `modules/avd/session-hosts/` | AVD Session Hosts from gallery |
+| App Install | `modules/avd/app-install/` | Chrome + Notepad++ via CSE |
+| Sysprep | `modules/avd/sysprep/` | Automated sysprep |
+| Image Capture | `modules/avd/image-capture/` | Capture golden image to gallery |
+| Image Gallery | `modules/avd/image-gallery/` | Azure Compute Gallery |
+| Scaling Plan | `modules/avd/scaling-plan/` | Auto scaling weekday/weekend |
+| FSLogix | `modules/fslogix/` | FSLogix profile management |
+| Monitoring | `modules/monitoring/` | Log Analytics + 6 Alert Rules |
+| Network | `modules/network/vnet/` | VNet + Subnets + DNS |
+| Storage | `modules/storage/` | Storage Account + File Share |
+| Resource Group | `modules/resourcegroup/` | Resource Group |
 
 
 ## 🌍 Multi-Environment Support
