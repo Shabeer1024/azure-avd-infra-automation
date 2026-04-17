@@ -1,0 +1,57 @@
+# ── Foundation ───────────────────────────────────────────────────
+resource_group_name   = "AVD-NonProd-Lab"
+location              = "centralus"
+
+# ── Network ──────────────────────────────────────────────────────
+vnet_name             = "Vnet-NonProd"
+vnet_address_prefix   = "10.1.0.0/16"
+vnet_subnet_count     = 2
+dns_servers           = ["10.1.1.4"]
+
+# ── Storage ──────────────────────────────────────────────────────
+storage_account_name  = "avdnonprodscripts001"
+
+# ── Gallery ──────────────────────────────────────────────────────
+gallery_name          = "avdNonProdGallery"
+image_definition_name = "avd-win11-multisession"
+
+# ── Host Pool ────────────────────────────────────────────────────
+host_pool_name        = "avd-nonprod-hostpool"
+workspace_name        = "avd-nonprod-workspace"
+app_group_name        = "avd-nonprod-appgroup"
+token_expiry_hours    = 48
+
+# ── Build VM ─────────────────────────────────────────────────────
+build_vm_name         = "avd-nonprod-build-vm"
+build_vm_size         = "Standard_D2s_v3"
+build_image_sku       = "win11-23h2-avd"
+admin_username        = "avdadmin"
+admin_password        = "NonProdP@ssw0rd!"
+
+# ── Image ────────────────────────────────────────────────────────
+subscription_id       = "yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy"
+image_version         = "1.0.0"
+session_host_count    = 2
+enable_session_hosts  = true
+
+# ── Domain Controller ────────────────────────────────────────────
+dc_vm_name            = "avd-nprd-dc-01"
+dc_vm_size            = "Standard_D2s_v3"
+domain_name           = "avdlab-nprd.local"
+dc_private_ip         = "10.1.1.4"
+
+# ── FSLogix ──────────────────────────────────────────────────────
+fslogix_share_name    = "profiles"
+fslogix_share_quota   = 50
+
+# ── Monitoring ───────────────────────────────────────────────────
+log_analytics_workspace_name = "avd-nonprod-logs"
+alert_email                  = "today.devops@outlook.com"
+
+# ── Scaling ──────────────────────────────────────────────────────
+scaling_plan_name     = "avd-nonprod-scaling"
+time_zone             = "UTC"
+peak_start_time       = "09:00"
+peak_end_time         = "18:00"
+ramp_up_start_time    = "06:00"
+off_peak_start_time   = "20:00"
