@@ -30,47 +30,20 @@
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Architecture## 🏗️ Architecture
 
-┌─────────────────────────────────────────────────────┐
-│                  AVD-image-Lab                      │
-│                  Resource Group                     │
-│                                                     │
-│  ┌─────────────────────────────────────────────┐   │
-│  │         Vnet01  10.0.0.0/16                 │   │
-│  │  subnet0 (AVD) │ subnet1 (DC)               │   │
-│  │  DNS → 10.0.1.4                             │   │
-│  └─────────────────────────────────────────────┘   │
-│                                                     │
-│  ┌──────────────┐    ┌──────────────────────────┐  │
-│  │  avd-dc-01   │    │    AVD Control Plane      │  │
-│  │  WS 2022     │    │  avd-lab-hostpool         │  │
-│  │  avdlab.local│    │  avd-lab-workspace        │  │
-│  │  10.0.1.4    │    │  avd-lab-appgroup         │  │
-│  └──────────────┘    └──────────────────────────┘  │
-│                                                     │
-│  ┌──────────────────────────────────────────────┐  │
-│  │           Session Hosts                      │  │
-│  │  avd-sh-0  │  avd-sh-1                       │  │
-│  │  Win11 24H2 Multi-session                    │  │
-│  │  Domain Joined · FSLogix Enabled             │  │
-│  └──────────────────────────────────────────────┘  │
-│                                                     │
-│  ┌──────────────┐    ┌──────────────────────────┐  │
-│  │   FSLogix    │    │      Monitoring           │  │
-│  │  Azure Files │    │  Log Analytics            │  │
-│  │  SMB Share   │    │  6 Alert Rules            │  │
-│  │  100GB quota │    │  Email Notifications      │  │
-│  └──────────────┘    └──────────────────────────┘  │
-│                                                     │
-│  ┌──────────────────────────────────────────────┐  │
-│  │           Auto Scaling Plan                  │  │
-│  │  Weekdays: 06:00 → 20:00  │  Weekend: Min    │  │
-│  │  67% cost saving                             │  │
-│  └──────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────┘
-
----
+| Layer | Resource | Details |
+|---|---|---|
+| 🌐 Network | Vnet01 | 10.0.0.0/16 · subnet0 (AVD) · subnet1 (DC) · DNS 10.0.1.4 |
+| 🏢 Domain Controller | avd-dc-01 | Windows Server 2022 · avdlab.local · 10.0.1.4 |
+| 🖥️ Host Pool | avd-lab-hostpool | Pooled · BreadthFirst · Max 5 sessions |
+| 💼 Workspace | avd-lab-workspace | App Group: avd-lab-appgroup |
+| 🖥️ Session Hosts | avd-sh-0, avd-sh-1 | Win11 24H2 · Domain Joined · FSLogix Enabled |
+| 👤 FSLogix | Azure Files SMB | 100GB quota · Profile roaming |
+| 📊 Monitoring | Log Analytics | 6 Alert Rules · Email Notifications |
+| ⚖️ Auto Scaling | avd-scaling-plan | 06:00→20:00 weekdays · 67% cost saving |
+| 🗄️ Storage | avdlabscripts001 | Scripts container · Profiles file share |
+| 🖼️ Gallery | avdLabGallery | Win11 multisession · versioned images |
 
 ## ✅ What's Deployed
 
@@ -176,3 +149,59 @@ Weekdays:
 Weekend:
 Minimum hosts only
 Cost saving: ~67% vs always-on ✅
+
+---
+
+## 📊 Monitoring & Alerts
+
+| Alert | Threshold | Severity |
+|---|---|---|
+| High CPU | > 80% | Warning |
+| High Memory | < 1GB available | Warning |
+| VM Unavailable | < 1 | Critical |
+
+All alerts → Email notification → `your-email@domain.com`
+
+---
+
+## 🔐 Security
+
+- All passwords stored in `terraform.tfvars` (gitignored)
+- RBAC assignments for FSLogix SMB access
+- RBAC for AVD scaling plan power management
+- Domain joined session hosts
+- VNet isolated subnets for AVD and DC
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Terraform | Infrastructure as Code |
+| Azure Virtual Desktop | Desktop virtualization |
+| Windows Server 2022 | Domain Controller |
+| Windows 11 24H2 | Session host OS |
+| Azure Compute Gallery | Image versioning |
+| FSLogix | User profile management |
+| Azure Monitor | Monitoring + Alerts |
+| Azure Files (SMB) | Profile storage |
+| Azure Auto Scaling | Cost optimization |
+
+---
+
+## 👤 Author
+
+**Shabeer**
+- GitHub: [@Shabeer1024](https://github.com/Shabeer1024)
+- LinkedIn: [your linkedin url]
+
+---
+
+## 📄 License
+
+MIT License — feel free to use and modify!
+
+---
+
+⭐ If this helped you, please star the repo!
